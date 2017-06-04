@@ -19,14 +19,14 @@ namespace hackinsampa.Controllers
 		[ResponseType(typeof(IEnumerable<Fornecedores>))]
 		public async Task<IHttpActionResult> GetFornecedor()
 		{
-			var extratos = await db.Extrato.GroupBy(d => d.DocumentoFornecedor).Select(d => new Fornecedores() { Documento = d.Key, Nome = d.FirstOrDefault().Fornecedor ?? "" }).ToListAsync();
+			var extratos = await db.Extrato.GroupBy(d => d.DocumentoFornecedor).Select(d => new Fornecedores() { Documento = d.Key, Nome = d.FirstOrDefault().Fornecedor ?? "" }).Take(100).ToListAsync();
 			return Ok(extratos);
 		}
 
 		[ResponseType(typeof(IEnumerable<Fornecedores>))]
 		public async Task<IHttpActionResult> GetFornecedor(string Id)
 		{
-			var extratos = (await db.Extrato.Where(d => d.DocumentoFornecedor == Id).ToListAsync()).Select(d => new VMExtrato()
+			var extratos = (await db.Extrato.Where(d => d.DocumentoFornecedor == Id).Take(100).ToListAsync()).Select(d => new VMExtrato()
 			{
 				Id = d.Id,
 				Orgão = d.Orgão,

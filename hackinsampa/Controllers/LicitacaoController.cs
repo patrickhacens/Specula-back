@@ -24,7 +24,7 @@ namespace hackinsampa.Controllers
 		{
 			Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("pt-BR");
 			Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("pt-BR");
-			var extratos = (await db.Extrato.OrderByDescending(d => d.DataAssinatura).Take(1000).ToListAsync()).Select(d => new VMExtrato()
+			var extratos = (await db.Extrato.OrderByDescending(d => d.DataAssinatura).Take(100).ToListAsync()).Select(d => new VMExtrato()
 			{
 				Id = d.Id,
 				Orgão = d.Orgão,
