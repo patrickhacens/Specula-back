@@ -9,6 +9,7 @@ using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Cors;
 
 namespace hackinsampa.Controllers
 {
@@ -17,6 +18,7 @@ namespace hackinsampa.Controllers
 		private Db db = new Db();
 
 		[ResponseType(typeof(IEnumerable<Fornecedores>))]
+		[EnableCors(origins: "*", headers: "*", methods: "*")]
 		public async Task<IHttpActionResult> GetFornecedor()
 		{
 			var extratos = await db.Extrato.GroupBy(d => d.DocumentoFornecedor).Select(d => new Fornecedores() { Documento = d.Key, Nome = d.FirstOrDefault().Fornecedor ?? "" }).Take(100).ToListAsync();
@@ -24,6 +26,7 @@ namespace hackinsampa.Controllers
 		}
 
 		[ResponseType(typeof(IEnumerable<Fornecedores>))]
+		[EnableCors(origins: "*", headers: "*", methods: "*")]
 		public async Task<IHttpActionResult> GetFornecedor(string Id)
 		{
 			var extratos = (await db.Extrato.Where(d => d.DocumentoFornecedor == Id).Take(100).ToListAsync()).Select(d => new VMExtrato()

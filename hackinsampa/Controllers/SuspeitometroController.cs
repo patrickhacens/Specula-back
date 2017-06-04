@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using hackinsampa.Models;
 using System.Threading;
+using System.Web.Http.Cors;
 
 namespace hackinsampa.Controllers
 {
@@ -20,6 +21,7 @@ namespace hackinsampa.Controllers
 
 
 		[ResponseType(typeof(IEnumerable<FornecedoresPorVariancia>))]
+		[EnableCors(origins: "*", headers: "*", methods: "*")]
 		public async Task<IHttpActionResult> GetLit()
 		{
 			Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("pt-BR");

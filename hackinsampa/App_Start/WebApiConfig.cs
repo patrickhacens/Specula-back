@@ -14,7 +14,7 @@ namespace hackinsampa
         public static void Register(HttpConfiguration config)
         {
 			config.EnableCors();
-			config.MessageHandlers.Add(new PreflightRequestsHandler());
+			//config.MessageHandlers.Add(new PreflightRequestsHandler());
 			// Web API configuration and services
 			// Configure Web API to use only bearer token authentication.
 			config.SuppressDefaultHostAuthentication();

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using hackinsampa.Models;
+using System.Web.Http.Cors;
 
 namespace hackinsampa.Controllers
 {
@@ -19,6 +20,7 @@ namespace hackinsampa.Controllers
 
 		// GET: api/Extrato
 		[ResponseType(typeof(IEnumerable<VMExtrato>))]
+		[EnableCors(origins: "*", headers: "*", methods: "*")]
 		public async Task<IHttpActionResult> GetExtrato()
 		{
 			var extratos = (await db.Extrato.Take(50).ToListAsync()).Select(d => new VMExtrato()
